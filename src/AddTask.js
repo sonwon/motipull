@@ -111,7 +111,7 @@ export default function ({ $target, initialState, onClose, addNewTask }) {
                 cheerUp: 0,
                 dueDate: null
             };
-            newTask.id = users.length + 1;
+            newTask.id = this.state.tasks.length+1;
             newTask.name = document.querySelector('#name').value;
             newTask.description = document.querySelector('#description').value;
 
@@ -143,7 +143,7 @@ export default function ({ $target, initialState, onClose, addNewTask }) {
                 })
             }
             newTask.detailWorks = newDetailWorks;
-
+            console.log(newTask.id);
             addNewTask(newTask);
             this.deleteStorage();
             onClose();
