@@ -12,6 +12,7 @@ ul {
     margin-top: 1rem;
     border: solid #595959;
     background-color: #ffff99;
+    overflow-y: auto;
 }
 
 h3 {
@@ -71,9 +72,8 @@ h3 {
     clear: both;
     margin-top: 1rem;
 }
-
 .next {
     clear: both;
     display: block;
-    margin: 1rem 0 0 auto;
+    margin : 3rem 0 0 auto;
 }

@@ -3,6 +3,8 @@ export default function TaskScreen({ $target, initialState, column_id, cheerUpBu
 
     const $taskScreen = document.createElement('div');
 
+    $taskScreen.className = "taskScreen";
+
     this.state = initialState;
 
     $target.appendChild($taskScreen);
@@ -54,14 +56,17 @@ export default function TaskScreen({ $target, initialState, column_id, cheerUpBu
     }
     $taskScreen.addEventListener('click', (e) => {
         const $li = e.target.closest('li')
+        const getId = $li.dataset.id;
         if (e.target.className === "cheerUp") {
-            const getId = $li.dataset.id;
             cheerUpButtonClick(getId);
         }
 
         if (e.target.className === "next") {
-            const getId = $li.dataset.id;
             nextButtonClick(getId)
+        }
+
+        if (Array.from(e.target.classList).includes('detail')) {
+            console.log(getId);
         }
     })
 

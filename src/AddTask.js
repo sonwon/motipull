@@ -24,8 +24,8 @@ export default function ({ $target, initialState, onClose, addNewTask }) {
 
         $addTask.innerHTML = `
             <div class=addContent>
-                <div class="addNameWrapper">이름* <input id="name" type="text" placeholder="이름을 입력해주세요." value="${getItem("name", "")}"></input></div>
-                <div class="addDescriptionWrapper">설명* <input id="description" type="text" placeholder="work에 대해 설명해주세요" value="${getItem("description", "")}"></input></div>
+                <div class="addNameWrapper"><div>이름*</div> <input id="name" type="text" placeholder="이름을 입력해주세요." value="${getItem("name", "")}"></input></div>
+                <div class="addDescriptionWrapper"><div>설명*</div> <textarea id="description" rows="5" cols="25" placeholder="work에 대해 설명해주세요" value="${getItem("description", "")}">${getItem("description", "")}</textarea></div>
                 <div class="addAdminWrapper">
                 <div>담당자*</div>
                 ${users.map((user, index) => `
@@ -88,8 +88,6 @@ export default function ({ $target, initialState, onClose, addNewTask }) {
             onClose()
         }
         if (e.target.className === "addDetail") {
-            console.log("디테일 추가")
-            console.log(document.querySelector('#inputDetail').value);
             details.push(document.querySelector('#inputDetail').value);
             this.render();
         }
@@ -133,6 +131,11 @@ export default function ({ $target, initialState, onClose, addNewTask }) {
             }
             newTask.classifications = newClassifications;
 
+            if((newTask.name == "") || (newTask.description == "") || (newTask.admins.length == 0) || (newTask.classifications.length==0)){
+                onClose();
+                return;
+            }
+
             newTask.isDetailWorks = (details.length == 0) ? false : true;
 
             const newDetailWorks = [];
@@ -143,7 +146,6 @@ export default function ({ $target, initialState, onClose, addNewTask }) {
                 })
             }
             newTask.detailWorks = newDetailWorks;
-            console.log(newTask.id);
             addNewTask(newTask);
             this.deleteStorage();
             onClose();
